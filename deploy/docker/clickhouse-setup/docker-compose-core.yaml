@@ -6,7 +6,7 @@ services:
     container_name: signoz-zookeeper-1
     hostname: zookeeper-1
     user: root
-    ports:
+    expose:
       - "2181:2181"
       - "2888:2888"
       - "3888:3888"
@@ -21,7 +21,7 @@ services:
   clickhouse:
     image: clickhouse/clickhouse-server:24.1.2-alpine
     container_name: signoz-clickhouse
-    # ports:
+    # expose:
     # - "9000:9000"
     # - "8123:8123"
     tty: true
@@ -97,7 +97,7 @@ services:
       - /home/ubuntu/signoz/root/:/hostfs:ro
     environment:
       - OTEL_RESOURCE_ATTRIBUTES=host.name=signoz-host,os.type=linux
-    ports:
+    expose:
       # - "1777:1777"     # pprof extension
       - "4317:4317" # OTLP gRPC receiver
       - "4318:4318" # OTLP HTTP receiver
